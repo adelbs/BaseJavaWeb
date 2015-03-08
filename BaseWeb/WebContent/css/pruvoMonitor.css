@@ -1,0 +1,138 @@
+
+input {
+	border: #AAAAAA 1px solid;
+}
+
+input[readonly] {
+	background-color: #FCFCFC;
+	border: #AAAAAA 1px solid;
+}
+
+.titleMenu {
+	margin-top: 10px;
+	margin-bottom: 2px;
+	font-family: verdana;
+	font-size: 10px;
+	background-color: #DFDFDF;
+	font-weight: bold;
+}
+
+.resultTable {
+	width: 100%;
+	border-collapse: collapse;
+	border-top-left-radius:     4em;
+}
+
+.resultTable thead {
+	background-color: #eee;
+	color: #606060;
+	font-family: Verdana;
+	font-size: 13px;
+	font-weight: bold;
+	text-align: left;
+}
+
+.resultTable tbody td {
+	font-family: Verdana;
+	font-size: 13px;
+	color: #606060;
+	border-bottom: 1px solid #CDCDCD;
+	cursor: pointer;
+}
+
+.resultTable tbody tr:hover {
+	background-color: #EDEDED;
+}
+
+#dialogTemplate div {
+	float: left;
+	border: #000000 0px solid;
+}
+
+#dialogTemplate div:nth-child(1){
+	height: 50px;
+}
+
+#dialogTemplate div:nth-child(2) {
+	width: 400px;
+	font-family: Verdana;
+	font-size: 13px;
+	margin-left: 20px;
+}
+
+#dialogTemplate div:nth-child(3), #dialogTemplate div:nth-child(4) {
+	width: 100%;
+}
+
+button {
+	font-size: 60% !important;
+}
+
+.ui-dialog-title {
+    font-size: 11px !important;
+}
+
+.imgButton {
+	cursor: pointer;
+}
+
+.cssTableLabel {
+	float: left;
+	clear: left;
+	width: 100px;
+	text-align: right;
+	margin-top: 2px;
+}
+
+.cssTableField {
+	float: left;
+	margin-top: 2px;
+}
+
+.cssTableLabel, .cssTableField {
+	font-family: Verdana;
+	font-size: 13px;
+}
+
+.error {
+	float: left;
+	color: #FF0000;
+}
+
+label.error {
+	border: #000000 0px solid;
+	clear: left;
+	width: 200px;
+	margin-bottom: 5px;
+}
+
+.ui-tabs {
+	font-size: 12px;
+}
+
+div.ui-datepicker{
+	font-size: 16px;
+}
+
+.waitBlock {
+	font-family: arial;
+	font-size: 16px;
+	height: 50px;
+}
+
+.divFiltros {
+	float: left;
+	padding: 10px;
+	border: #CDCDCD 1px solid;
+	width: 97%;
+	margin-bottom: 20px;
+}
+
+.divFiltros .cssTableLabel, .divFiltros .cssTableLabel {
+	width: 130px;
+	clear: none;
+}
+
+.divFiltros .cssTableField input, .divFiltros .cssTableField select {
+	width: 300px;
+}

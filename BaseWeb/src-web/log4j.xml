@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="threshold" value="info" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p][%-25d{dd/MM/yyyy - HH:mm.ss,SS}][%t:%-10c{1}] :: %m%n"/>
+		</layout>
+	</appender>
+
+	<appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="threshold" value="info" />
+		
+	 	<param name="file" value="${user.home}/obi1/log/Obi1Web.log" />
+	<!--  	<param name="file" value="/log/pruvoMonitorWeb.log" />-->
+		
+		<param name="MaxFileSize" value="1024KB" />
+		<param name="MaxBackupIndex" value="5" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p][%-25d{dd/MM/yyyy - HH:mm.ss,SS}][%t:%-10c{1}] :: %m%n"/>
+		</layout>
+	</appender>
+
+	<root>
+		<level value="all"/>
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</root>
+</log4j:configuration>

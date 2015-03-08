@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="tiles.template" template="/WEB-INF/jsp/common/template.jsp">
+		<put-attribute name="menu" value="/WEB-INF/jsp/common/menu.jsp" />
+		<put-attribute name="notificationArea" value="/WEB-INF/jsp/common/notificationArea.jsp" />
+	</definition>
+
+	<definition name="tiles.template.noMenu" template="/WEB-INF/jsp/common/template.jsp" >
+		<put-attribute name="menu" value="/WEB-INF/jsp/common/blank.jsp" />
+		<put-attribute name="notificationArea" value="/WEB-INF/jsp/common/blank.jsp" />
+	</definition>
+
+	<!-- HOME -->
+	<definition name="tiles.home" extends="tiles.template">
+		<put-attribute name="body" value="/WEB-INF/jsp/home/home.jsp" />
+	</definition>
+
+	<!-- LOGIN -->
+	<definition name="tiles.login" extends="tiles.template.noMenu">
+		<put-attribute name="body" value="/WEB-INF/jsp/home/login.jsp" />
+	</definition>
+
+	<!-- DB -->
+	<definition name="tiles.connectDB" extends="tiles.template.noMenu">
+		<put-attribute name="body" value="/WEB-INF/jsp/home/connectDB.jsp" />
+	</definition>
+
+</tiles-definitions>

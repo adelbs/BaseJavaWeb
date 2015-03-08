@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans  
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.2.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+	http://www.springframework.org/schema/tx
+ 	http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+ 	http://www.springframework.org/schema/jee
+ 	http://www.springframework.org/schema/jee/spring-jee-3.2.xsd 
+ 	http://www.springframework.org/schema/task
+ 	http://www.springframework.org/schema/task/spring-task-3.2.xsd 
+ 	">
+
+	<tx:annotation-driven />
+
+	<!-- Antigo - My SQL -->
+	<!-- bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/pruvomonitor" />
+		<property name="username" value="root" />
+		<property name="password" value="sadb123" />
+	</bean-->
+	
+	<!-- DataSource do TomCat -->
+	<!-- bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/PruvoMonitorDB"/>
+	</bean-->
+	
+	<bean id="dataSource" class="obi1.fi.business.datasource.FiDataSource" />
+	
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> 
+       <!--  <property name="jpaVendorAdapter"> 
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property> -->
+        <property name="persistenceUnitName" value="pu" /> 
+        <property name="dataSource" ref="dataSource" /> 
+        
+       <!--  <property name = "persistenceXmlLocation" value = "classpath:/META-INF/persistence-client.xml" />-->
+        <property name="packagesToScan" value="obi1.fi.business.entity" />
+    
+    	<property name="jpaVendorAdapter">
+  			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+    			<property name="showSql" value="false" />
+    			<property name="generateDdl" value="false" />
+    			<property name="databasePlatform" value="org.hibernate.dialect.DerbyDialect"/>
+  			</bean>
+		</property>    
+    </bean> 
+	
+	<bean name="template" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<bean name="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg ref="dataSource" />
+	</bean>	
+	
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<tx:annotation-driven />
+	
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+	
+	<bean class="obi1.fi.business.util.ApplicationContextProvider"/> 
+
+	<bean id="concurrentExecutors" class="java.util.concurrent.Executors" factory-method="newFixedThreadPool">
+		<constructor-arg value="10"/>
+	</bean>
+	
+	<task:executor id="threadPoolTaskExecutor" pool-size="20"/>
+	<task:annotation-driven executor="concurrentExecutors"/>
+	
+</beans>
+
